@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomNavigation" parent="Theme.AppCompat.Light">
+        <item name="android:background">@drawable/white_grey_border_top</item>
+        <item name="itemIconTint">@drawable/bottombar_selector</item>
+        <item name="itemTextColor">@drawable/bottombar_selector</item>
+        <item name="android:fontFamily">@font/quicksand_bold</item>
+    </style>
+</resources>

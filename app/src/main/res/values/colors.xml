@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#673ab7</color>
+    <color name="colorPrimaryDark">#512da8</color>
+    <color name="colorPrimaryLight">#D1C4E9</color>
+    <color name="colorAccent">#ffc400</color>
+    <color name="primary_text">#282837</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+
+    <color name="background_card">#53292929</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#c3c3c3</color>
+    <color name="buttombar_grey">#979797</color>
+    <color name="black">#282837</color>
+</resources>
