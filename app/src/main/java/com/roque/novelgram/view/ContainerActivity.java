@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.roque.novelgram.R;
-import com.roque.novelgram.view.fragment.HomeFragment;
+import com.roque.novelgram.post.view.HomeFragment;
 import com.roque.novelgram.view.fragment.ProfileFragment;
 import com.roque.novelgram.view.fragment.SearchFragment;
 

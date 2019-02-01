@@ -75,8 +75,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="@string/text_btn_login"
-                    android:theme="@style/RaiseButtonDark"
-                    android:onClick="goHome"/>
+                    android:theme="@style/RaiseButtonDark" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
