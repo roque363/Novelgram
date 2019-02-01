@@ -29,4 +29,7 @@
     <string name="titleimage_detail">Best Waifu</string>
     <string name="contentimage_detail">Miku Nakano is the third sister of the Nakano Quintuplets. She is a silent and reserved girl. Miku tends to have pessimistic attitude and little confidence regarding herself.</string>
     <string name="transitionname_picture">transitionnamepicture</string>
+
+    <string name="login_error">Ocurrió un error:</string>
+    <string name="login_blank">Completar Campos</string>
 </resources>
