@@ -37,4 +37,7 @@
     <string name="text_btn_create_post">Crear Post</string>
     <string name="message_cameraNotAvailable">La camara no esta disponible</string>
     <string name="message_cameraNotAvailablePermission">La aplicación no cuenta con los permisos necesarios</string>
+
+    <string name="opening_camera">Abriendo la Camera..</string>
+    <string name="loading_photo">Cargando Foto..</string>
 </resources>

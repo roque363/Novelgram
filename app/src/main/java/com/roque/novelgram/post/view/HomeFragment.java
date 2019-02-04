@@ -38,9 +38,7 @@ import java.util.Date;
  */
 public class HomeFragment extends Fragment {
 
-    private static final int REQUEST_CAMERA = 1;
     private FloatingActionButton fabCamera;
-    private String photoPathTemp = "";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -63,81 +61,24 @@ public class HomeFragment extends Fragment {
         PictureAdapterRecyclerView pictureAdapterRecyclerView = new PictureAdapterRecyclerView(buildPicture(), R.layout.cardview_picture, getActivity());
         picturesRecycle.setAdapter(pictureAdapterRecyclerView);
 
-        String[] permissions = new String[]{
-                Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-        };
+        int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para la camara!.");
+            String message = getString(R.string.message_cameraNotAvailablePermission);
+            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        } else {
+            Log.i("Mensaje", "Tienes permiso para usar la camara.");
+        }
 
         fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
-
-                if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-                    Log.i("Mensaje", "No se tiene permiso para la camara!.");
-                    String message = getString(R.string.message_cameraNotAvailablePermission);
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.i("Mensaje", "Tienes permiso para usar la camara.");
-                    takePicture();
-                }
+                Intent intent = new Intent(getActivity(), NewPostActivity.class);
+                startActivity(intent);
             }
         });
         return view;
-    }
-
-    private void takePicture() {
-        Intent intentTakePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intentTakePicture.resolveActivity(getActivity().getPackageManager()) != null){
-            File photoFile = null;
-
-            try {
-                photoFile = createImageFile();
-
-                if (photoFile != null){
-                    String packageName = getActivity().getApplicationContext().getPackageName();
-
-                    //Uri photoUri = FileProvider.getUriForFile(getActivity(), packageName, photoFile);
-                    Uri photoUri = Uri.fromFile(photoFile);
-
-                    intentTakePicture.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                    startActivityForResult(intentTakePicture, REQUEST_CAMERA);
-                }
-            } catch (Exception e){
-                e.printStackTrace();
-                //Log.d("Error: ",e.getMessage());
-            }
-        } else {
-            String message = getString(R.string.message_cameraNotAvailable);
-            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if  (requestCode == REQUEST_CAMERA && resultCode == getActivity().RESULT_OK) {
-            Log.d("HomeFragment", "CAMERA OK!! :");
-            Toast.makeText(this.getContext(), "Camara OK!!", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(getActivity(), NewPostActivity.class);
-            intent.putExtra("PHOTO_PATH_TEMP", photoPathTemp);
-            startActivity(intent);
-        }
-    }
-
-    private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyMMdd_HH-mm-ss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        File photo = File.createTempFile(imageFileName,".jpg",storageDir);
-
-        photoPathTemp = "file:" + photo.getAbsolutePath();
-
-        return photo;
     }
 
     public ArrayList<Picture> buildPicture(){
