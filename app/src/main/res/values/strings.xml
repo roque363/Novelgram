@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Novelgram</string>
     <string name="title_activity_reference">ReferenceActivity</string>
+    <string name="facebook_app_id">497995777390881</string>
+    <string name="fb_login_protocol_scheme">fb497995777390881</string>
+
 
     <string name="hint_username">Nombre de usuario</string>
     <string name="hint_password">Contraseña</string>
@@ -30,7 +33,7 @@
     <string name="contentimage_detail">Miku Nakano is the third sister of the Nakano Quintuplets. She is a silent and reserved girl. Miku tends to have pessimistic attitude and little confidence regarding herself.</string>
     <string name="transitionname_picture">transitionnamepicture</string>
 
-    <string name="login_error">Ocurrió un error:</string>
+    <string name="login_error">Error:</string>
     <string name="login_blank">Completar Campos</string>
     <string name="hint_title">Titulo</string>
     <string name="hint_description">Descripcion</string>
@@ -40,4 +43,6 @@
 
     <string name="opening_camera">Abriendo la Camera..</string>
     <string name="loading_photo">Cargando Foto..</string>
+    <string name="menu_signout">Cerrar Sesión</string>
+    <string name="menu_about">Acerca de</string>
 </resources>

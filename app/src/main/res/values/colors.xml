@@ -17,4 +17,5 @@
     <color name="grey_background">#e8e8e8</color>
     <color name="buttombar_grey">#979797</color>
     <color name="black">#282837</color>
+    <color name="transparent">#00ffffff</color>
 </resources>

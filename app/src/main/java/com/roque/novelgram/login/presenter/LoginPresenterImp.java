@@ -1,7 +1,9 @@
 package com.roque.novelgram.login.presenter;
 
+import android.app.Activity;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.roque.novelgram.login.interactor.LoginInteractor;
 import com.roque.novelgram.login.interactor.LoginInteractorImp;
 import com.roque.novelgram.login.view.LoginView;
@@ -17,10 +19,10 @@ public class LoginPresenterImp implements LoginPresenter {
     }
 
     @Override
-    public void signIn(String username, String password) {
+    public void signIn(String username, String password, Activity activity, FirebaseAuth firebaseAuth) {
         loginView.disableImputs();
         loginView.showProgressBar();
-        interactor.signIn(username, password);
+        interactor.signIn(username, password, activity, firebaseAuth);
     }
 
     @Override

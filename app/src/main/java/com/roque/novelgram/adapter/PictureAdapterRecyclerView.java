@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.roque.novelgram.R;
 import com.roque.novelgram.model.Picture;
-import com.roque.novelgram.view.PictureDetailActivity;
+import com.roque.novelgram.post.view.PictureDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

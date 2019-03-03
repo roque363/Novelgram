@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".view.PictureDetailActivity">
+    tools:context=".post.view.PictureDetailActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -22,7 +22,7 @@
             app:contentScrim="@color/colorPrimary">
 
             <ImageView
-                android:id="@+id/image_header"
+                android:id="@+id/imageHeader"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"

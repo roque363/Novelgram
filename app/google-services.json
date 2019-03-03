@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "297427623713",
+    "firebase_url": "https://novelgram-175e8.firebaseio.com",
+    "project_id": "novelgram-175e8",
+    "storage_bucket": "novelgram-175e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297427623713:android:344cdee96b691938",
+        "android_client_info": {
+          "package_name": "com.roque.novelgram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297427623713-67p1t5vf89q46a2qn3arao4fe6d7irjp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roque.novelgram",
+            "certificate_hash": "04e538f4b6267e49c26461a12c30c5a4516a1dd6"
+          }
+        },
+        {
+          "client_id": "297427623713-ch0k539ntf6aiqoj21dbusafk8niac3a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5Ne3EV1JAZAIZqHKEhS8Kk5nrC-HsAXY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297427623713-ch0k539ntf6aiqoj21dbusafk8niac3a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

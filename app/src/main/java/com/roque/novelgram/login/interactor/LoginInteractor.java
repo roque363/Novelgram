@@ -1,6 +1,9 @@
 package com.roque.novelgram.login.interactor;
 
-public interface LoginInteractor {
+import android.app.Activity;
 
-    void signIn(String username, String password);
+import com.google.firebase.auth.FirebaseAuth;
+
+public interface LoginInteractor {
+    void signIn(String username, String password, Activity activity, FirebaseAuth firebaseAuth);
 }

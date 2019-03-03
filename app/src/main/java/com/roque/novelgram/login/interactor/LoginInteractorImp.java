@@ -1,5 +1,8 @@
 package com.roque.novelgram.login.interactor;
 
+import android.app.Activity;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.roque.novelgram.login.presenter.LoginPresenter;
 import com.roque.novelgram.login.repository.LoginRepository;
 import com.roque.novelgram.login.repository.LoginRepositoryImp;
@@ -15,7 +18,7 @@ public class LoginInteractorImp implements  LoginInteractor {
     }
 
     @Override
-    public void signIn(String username, String password) {
-        repository.signIn(username, password);
+    public void signIn(String username, String password, Activity activity, FirebaseAuth firebaseAuth) {
+        repository.signIn(username, password, activity, firebaseAuth);
     }
 }

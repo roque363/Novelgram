@@ -3,23 +3,33 @@ package com.roque.novelgram.post.view;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.roque.novelgram.NovelgramApplication;
 import com.roque.novelgram.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -31,20 +41,28 @@ public class NewPostActivity extends AppCompatActivity {
     private ImageView imgPhoto;
     private LinearLayout imgNewPost;
     private RelativeLayout imgBackground;
+    private Button btnCreatePost;
 
+    private static final String TAG = "NewPostActivity";
     private static final int REQUEST_CAMERA = 1;
     private String photoPathTemp = "";
+
+    private NovelgramApplication app;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
-
         showToolbar("Crear Nuevo Post", true);
+
+        app = (NovelgramApplication) getApplicationContext();
+        storageReference = app.getStorageReference();
 
         imgPhoto = (ImageView)findViewById(R.id.imgPhoto);
         imgNewPost = (LinearLayout)findViewById(R.id.imgNewPost);
         imgBackground = (RelativeLayout)findViewById(R.id.imgBackground);
+        btnCreatePost = (Button)findViewById(R.id.btnCreatePost);
 
         imgNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +83,48 @@ public class NewPostActivity extends AppCompatActivity {
             }
         });
 
+        btnCreatePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uploadPhoto();
+            }
+        });
+
+    }
+
+    private void uploadPhoto() {
+        imgPhoto.setDrawingCacheEnabled(true);
+        imgPhoto.buildDrawingCache();
+
+        Bitmap bitmap = imgPhoto.getDrawingCache();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+
+        byte[] photoByte = byteArrayOutputStream.toByteArray();
+        String photoName = photoPathTemp.substring(photoPathTemp.lastIndexOf("/")+1, photoPathTemp.length());
+
+        final StorageReference photoReference = storageReference.child("postImages/" + photoName);
+
+        UploadTask uploadTask = photoReference.putBytes(photoByte);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error al subir la foto " + e.toString());
+                e.printStackTrace();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                photoReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uriPhoto) {
+                        String photoURL = uriPhoto.toString();
+                        Log.w(TAG, "URL Photo > " + photoURL);
+                        finish();
+                    }
+                });
+            }
+        });
     }
 
     @Override
