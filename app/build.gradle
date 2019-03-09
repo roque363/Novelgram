@@ -1,4 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+def FACEBOOK_APP_ID = '"'+FacebookAppId+'"' ?: '"No Token Facebook"';
+
+android.buildTypes.each { type ->
+    type.resValue 'string', 'FACEBOOK_APP_ID', FACEBOOK_APP_ID
+    type.buildConfigField 'String', 'FACEBOOK_APP_ID', FACEBOOK_APP_ID
+}
 
 android {
     compileSdkVersion 27
@@ -38,6 +45,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-auth:16.0.4'
     implementation 'com.google.firebase:firebase-storage:16.0.5'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
 
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
