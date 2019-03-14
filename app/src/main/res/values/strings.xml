@@ -3,7 +3,6 @@
     <string name="title_activity_reference">ReferenceActivity</string>
     <string name="fb_login_protocol_scheme">fb497995777390881</string>
 
-
     <string name="hint_username">Nombre de usuario</string>
     <string name="hint_password">Contraseña</string>
     <string name="text_btn_login">Login</string>
@@ -44,4 +43,6 @@
     <string name="loading_photo">Cargando Foto..</string>
     <string name="menu_signout">Cerrar Sesión</string>
     <string name="menu_about">Acerca de</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 </resources>

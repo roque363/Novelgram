@@ -22,6 +22,10 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/FACEBOOK_APP_ID"/>
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
         <provider
             android:authorities="com.roque.novelgram"
             android:name="android.support.v4.content.FileProvider"
@@ -31,6 +35,20 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path"/>
         </provider>
+
+        <service android:name=".service.MessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
 
         <activity
             android:name=".login.view.LoginActivity"
@@ -53,10 +71,6 @@
 
         <activity android:name=".view.ContainerActivity" />
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
         <activity
             android:name=".post.view.PictureDetailActivity"
             android:parentActivityName=".view.ContainerActivity">
@@ -64,11 +78,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.ContainerActivity" />
         </activity>
+
         <activity
             android:name=".post.view.NewPostActivity"
             android:windowSoftInputMode="stateHidden">
-
         </activity>
+
     </application>
 
 </manifest>
