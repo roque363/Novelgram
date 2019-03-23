@@ -25,15 +25,15 @@
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="10dp"
                 android:useDefaultMargins="true">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/search_fragment_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingTop="10dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"/>
+                    android:layout_height="match_parent" />
 
             </GridLayout>
 

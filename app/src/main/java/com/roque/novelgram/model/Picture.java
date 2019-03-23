@@ -3,15 +3,15 @@ package com.roque.novelgram.model;
 public class Picture {
 
     private String picture;
-    private String username;
+    private String name;
     private String time;
     private String like_number = "0";
 
     public Picture () {}
 
-    public Picture(String picture, String username, String time, String like_number) {
+    public Picture(String picture, String name, String time, String like_number) {
         this.picture = picture;
-        this.username = username;
+        this.name = name;
         this.time = time;
         this.like_number = like_number;
     }
@@ -24,12 +24,12 @@ public class Picture {
         this.picture = picture;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String username) {
+        this.name = username;
     }
 
     public String getTime() {

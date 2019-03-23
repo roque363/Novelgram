@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.facebook.internal.ImageRequest;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.roque.novelgram.NovelgramApplication;
 import com.roque.novelgram.R;
 import com.roque.novelgram.login.view.LoginActivity;
 import com.squareup.picasso.Callback;
@@ -70,7 +71,7 @@ public class MessagingService extends FirebaseMessagingService {
 
     private void mostrarNotificacionImagen(String title, String message, Bitmap img_url) {
 
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, NovelgramApplication.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
@@ -103,7 +104,7 @@ public class MessagingService extends FirebaseMessagingService {
 
     private void mostrarNotificacion(String title, String body) {
 
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, NovelgramApplication.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 

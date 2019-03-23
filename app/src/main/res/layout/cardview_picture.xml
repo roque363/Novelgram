@@ -31,7 +31,7 @@
             android:background="@color/background_card">
 
             <TextView
-                android:id="@+id/username_card"
+                android:id="@+id/name_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username_card"

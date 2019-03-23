@@ -44,7 +44,7 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
     @Override
     public void onBindViewHolder(@NonNull PictureViewHolder holder, int position) {
         Picture picture = pictures.get(position);
-        holder.usernameCard.setText(picture.getUsername());
+        holder.nameCard.setText(picture.getName());
         holder.timeCard.setText(picture.getTime());
         holder.likeNumberCard.setText(picture.getLike_number());
 
@@ -78,7 +78,7 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
     public class PictureViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView pictureCard;
-        private TextView usernameCard;
+        private TextView nameCard;
         private TextView timeCard;
         private TextView likeNumberCard;
 
@@ -86,7 +86,7 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
             super(itemView);
 
             pictureCard = (ImageView) itemView.findViewById(R.id.picture_card);
-            usernameCard = (TextView) itemView.findViewById(R.id.username_card);
+            nameCard = (TextView) itemView.findViewById(R.id.name_card);
             timeCard = (TextView) itemView.findViewById(R.id.time_card);
             likeNumberCard = (TextView) itemView.findViewById(R.id.like_number_card);
         }
