@@ -34,7 +34,7 @@
                     android:id="@+id/imgPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerInside"
                     tools:ignore="ContentDescription" />
 
                 <RelativeLayout
@@ -87,13 +87,6 @@
                         android:hint="@string/hint_description" />
 
                 </android.support.design.widget.TextInputLayout>
-                
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
 
                 <Button
                     android:id="@+id/btnCreatePost"
@@ -105,6 +98,13 @@
                     android:fontFamily="@font/quicksand_bold"
                     android:text="@string/text_btn_create_post"
                     android:theme="@style/RaiseButtonDark" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
 
             </LinearLayout>
 
