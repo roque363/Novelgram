@@ -26,6 +26,23 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
     private int ressource;
     private Activity activity;
 
+    public class PictureViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView pictureCard;
+        private TextView nameCard;
+        private TextView timeCard;
+        private TextView likeNumberCard;
+
+        public PictureViewHolder(View itemView) {
+            super(itemView);
+
+            pictureCard = (ImageView) itemView.findViewById(R.id.picture_card);
+            nameCard = (TextView) itemView.findViewById(R.id.name_card);
+            timeCard = (TextView) itemView.findViewById(R.id.time_card);
+            likeNumberCard = (TextView) itemView.findViewById(R.id.like_number_card);
+        }
+    }
+
     public PictureAdapterRecyclerView(ArrayList<Picture> pictures, int ressource, Activity activity) {
         this.pictures = pictures;
         this.ressource = ressource;
@@ -48,7 +65,7 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
         holder.timeCard.setText(picture.getTime());
         holder.likeNumberCard.setText(picture.getLike_number());
 
-        Picasso.get().load(picture.getPicture()).into(holder.pictureCard);
+        Picasso.get().load(picture.getPicture()).placeholder(R.drawable.image_default).into(holder.pictureCard);
 
         holder.pictureCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,20 +92,4 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
         return pictures.size();
     }
 
-    public class PictureViewHolder extends RecyclerView.ViewHolder {
-
-        private ImageView pictureCard;
-        private TextView nameCard;
-        private TextView timeCard;
-        private TextView likeNumberCard;
-
-        public PictureViewHolder(View itemView) {
-            super(itemView);
-
-            pictureCard = (ImageView) itemView.findViewById(R.id.picture_card);
-            nameCard = (TextView) itemView.findViewById(R.id.name_card);
-            timeCard = (TextView) itemView.findViewById(R.id.time_card);
-            likeNumberCard = (TextView) itemView.findViewById(R.id.like_number_card);
-        }
-    }
 }

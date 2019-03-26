@@ -97,7 +97,7 @@ public class NewPostActivity extends AppCompatActivity {
         btnImgContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
+                /*try {
                     PackageManager packageManager = getPackageManager();
                     int permissionCheck = packageManager.checkPermission(Manifest.permission.CAMERA, getPackageName());
 
@@ -112,7 +112,8 @@ public class NewPostActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Toast.makeText(NewPostActivity.this,"Camera Permission error", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
-                }
+                }*/
+                openFileChooser();
                 // int permissionCheck = ContextCompat.checkSelfPermission(NewPostActivity.this, Manifest.permission.CAMERA);
             }
         });

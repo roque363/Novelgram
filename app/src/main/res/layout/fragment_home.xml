@@ -9,21 +9,26 @@
 
     <include layout="@layout/actionbar_toolbar"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ProgressBar
+            android:id="@+id/progressBarHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/pictureRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="16dp"/>
+            android:layout_height="match_parent"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabCamera"

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -21,8 +22,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.UploadTask;
 import com.roque.novelgram.R;
 import com.roque.novelgram.adapter.PictureAdapterRecyclerView;
 import com.roque.novelgram.model.Picture;
@@ -31,7 +41,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +52,12 @@ import java.util.Date;
 public class HomeFragment extends Fragment {
 
     private FloatingActionButton fabCamera;
+    private RecyclerView picturesRecycle;
+    private ProgressBar progressBarHome;
+
+    private static final String TAG = "HomeFragment";
+
+    private FirebaseFirestore firebaseFirestore;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -51,16 +70,47 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         showToolbar(getResources().getString(R.string.tap_home), false, view);
 
-        RecyclerView picturesRecycle = (RecyclerView) view.findViewById(R.id.pictureRecycler);
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
         fabCamera = (FloatingActionButton)view.findViewById(R.id.fabCamera);
+        progressBarHome = view.findViewById(R.id.progressBarHome);
+        picturesRecycle = (RecyclerView) view.findViewById(R.id.pictureRecycler);
+        picturesRecycle.setHasFixedSize(true);
+        showProgressBar();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         picturesRecycle.setLayoutManager(linearLayoutManager);
 
-        PictureAdapterRecyclerView pictureAdapterRecyclerView = new PictureAdapterRecyclerView(buildPicture(), R.layout.cardview_picture, getActivity());
-        picturesRecycle.setAdapter(pictureAdapterRecyclerView);
+        final ArrayList<Picture> pictures = new ArrayList<>();
+
+        firebaseFirestore.collection("pictures")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document.exists()) {
+                                    String picture = document.get("picture").toString();
+                                    String name = document.get("name").toString();
+                                    String time = document.get("time").toString();
+                                    String like_number = document.get("like_number").toString();
+
+                                    Log.d(TAG, "Nombre: "+ name);
+                                    pictures.add(new Picture(picture, name, time, like_number));
+                                }
+                            }
+                            hideProgressBar();
+                            PictureAdapterRecyclerView pictureAdapterRecyclerView = new PictureAdapterRecyclerView(pictures, R.layout.cardview_picture, getActivity());
+                            picturesRecycle.setAdapter(pictureAdapterRecyclerView);
+                        } else {
+                            hideProgressBar();
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
         int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
 
@@ -82,20 +132,15 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public ArrayList<Picture> buildPicture(){
-        ArrayList<Picture> pictures = new ArrayList<>();
-        pictures.add(new Picture("https://pm1.narvii.com/6984/9ed41b1a0e7457a59d74dc093b77ee49ebf3d65br1-519-519v2_hq.jpg", "Utaha Kasumigaoka" , "5 dias", "17 Me Gusta"));
-        pictures.add(new Picture("https://66.media.tumblr.com/c1deef47dd21775a9143dd275e71c068/tumblr_pkf99yqJv51up5qwko1_1280.jpg", "Miku Nakano" , "2 dias", "8 Me Gusta"));
-        pictures.add(new Picture("https://pm1.narvii.com/6983/4e0c53b03f73478d1f1b4229a5b60d8307749c38r1-1080-1080v2_hq.jpg", "Eriri Spencer" , "4 dias", "21 Me Gusta"));
-        pictures.add(new Picture("https://roque363.github.io/novel-music/src/assets/img/contenido.png", "roque363" , "1 dias", "7 Me Gusta"));
-        return pictures;
-    }
-
     public void showToolbar(String tittle, boolean upButton, View view){
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(tittle);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
     }
+
+    public void showProgressBar() { progressBarHome.setVisibility(View.VISIBLE); }
+
+    public void hideProgressBar() { progressBarHome.setVisibility(View.INVISIBLE); }
 
 }
