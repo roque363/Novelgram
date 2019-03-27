@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdapterRecyclerView.PictureViewHolder> {
+public class PictureSmallAdapterRecyclerView extends RecyclerView.Adapter<PictureSmallAdapterRecyclerView.PictureViewHolder> {
 
     private ArrayList<Picture> pictures;
     private int ressource;
@@ -28,22 +28,18 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
 
     public class PictureViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView pictureCard;
-        private TextView nameCard;
-        private TextView timeCard;
-        private TextView likeNumberCard;
+        private ImageView pictureCardSmall;
+        private TextView nameCardSmall;
 
         public PictureViewHolder(View itemView) {
             super(itemView);
 
-            pictureCard = (ImageView) itemView.findViewById(R.id.picture_card);
-            nameCard = (TextView) itemView.findViewById(R.id.name_card);
-            timeCard = (TextView) itemView.findViewById(R.id.time_card);
-            likeNumberCard = (TextView) itemView.findViewById(R.id.like_number_card);
+            pictureCardSmall = (ImageView) itemView.findViewById(R.id.picture_card_small);
+            nameCardSmall = (TextView) itemView.findViewById(R.id.name_card_small);
         }
     }
 
-    public PictureAdapterRecyclerView(ArrayList<Picture> pictures, int ressource, Activity activity) {
+    public PictureSmallAdapterRecyclerView(ArrayList<Picture> pictures, int ressource, Activity activity) {
         this.pictures = pictures;
         this.ressource = ressource;
         this.activity = activity;
@@ -61,13 +57,11 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
     @Override
     public void onBindViewHolder(@NonNull PictureViewHolder holder, int position) {
         final Picture picture = pictures.get(position);
-        holder.nameCard.setText(picture.getName());
-        holder.timeCard.setText(picture.getTime());
-        holder.likeNumberCard.setText(picture.getLike_number());
+        holder.nameCardSmall.setText(picture.getName());
 
-        Picasso.get().load(picture.getPicture()).placeholder(R.drawable.image_default).into(holder.pictureCard);
+        Picasso.get().load(picture.getPicture()).placeholder(R.drawable.image_default).into(holder.pictureCardSmall);
 
-        holder.pictureCard.setOnClickListener(new View.OnClickListener() {
+        holder.pictureCardSmall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String transitionNamePicture = activity.getString(R.string.transitionname_picture);
@@ -99,5 +93,4 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
     public int getItemCount() {
         return pictures.size();
     }
-
 }

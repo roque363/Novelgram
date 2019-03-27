@@ -19,6 +19,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.roque.novelgram.R;
 import com.roque.novelgram.adapter.PictureAdapterRecyclerView;
+import com.roque.novelgram.adapter.PictureSmallAdapterRecyclerView;
 import com.roque.novelgram.model.Picture;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class SearchFragment extends Fragment {
 
         final ArrayList<Picture> pictures = new ArrayList<>();
 
-        final PictureAdapterRecyclerView pictureAdapterRecyclerView = new PictureAdapterRecyclerView(pictures, R.layout.cardview_picture_small, getActivity());
+        final PictureSmallAdapterRecyclerView pictureAdapterRecyclerView = new PictureSmallAdapterRecyclerView(pictures, R.layout.cardview_picture_small, getActivity());
         picturesRecycler.setAdapter(pictureAdapterRecyclerView);
 
         firebaseFirestore.collection("pictures")
@@ -74,8 +75,10 @@ public class SearchFragment extends Fragment {
                                     String name = document.get("name").toString();
                                     String time = document.get("time").toString();
                                     String like_number = document.get("like_number").toString();
+                                    String description = document.get("description").toString();;
+                                    String extra = document.get("extra").toString();;
 
-                                    pictures.add(new Picture(key, picture, name, time, like_number));
+                                    pictures.add(new Picture(key, picture, name, time, like_number, description, extra));
                                 }
                             }
                             pictureAdapterRecyclerView.notifyDataSetChanged();

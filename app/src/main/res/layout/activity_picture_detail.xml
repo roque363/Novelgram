@@ -58,7 +58,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/textsize_username_detail"
+                android:textColor="@color/primary_text"
                 android:text="@string/username_card"
+                android:textStyle="bold"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"/>
 
@@ -74,6 +76,7 @@
                     android:id="@+id/likeNumberDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/textsize_likenumber_detail"
                     android:text="@string/likenumber_detail" />
 
@@ -92,26 +95,61 @@
                 android:layout_height="@dimen/height_divider"
                 android:background="@android:color/darker_gray"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/firstword_card"
+                    android:textSize="@dimen/textsize_firstword_card"
+                    android:fontFamily="@font/quicksand_medium"/>
+
+                <TextView
+                    android:id="@+id/timeCardDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/timecard_card"
+                    android:textSize="@dimen/textsize_firstword_card"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:layout_marginStart="5dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/contentImageDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/contentimage_detail"
+                android:textSize="@dimen/textsize_contentimage_detail" />
+
             <TextView
                 android:id="@+id/secondTitlePictureDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
                 android:gravity="center_horizontal"
-                android:paddingTop="@dimen/paddingTop_tittleimage_detail"
                 android:text="@string/titleimage_detail"
-                android:textSize="@dimen/textsize_username_detail"
-                android:textStyle="bold" />
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/textsize_username_detail" />
 
             <TextView
-                android:id="@+id/content_image_detail"
+                android:id="@+id/contentImagePresentation"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:paddingTop="@dimen/paddingTop_tittleimage_detail"
-                android:paddingLeft="35dp"
-                android:paddingRight="35dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/contentimage_detail"
                 android:textSize="@dimen/textsize_contentimage_detail" />
 
@@ -141,6 +179,6 @@
         android:src="@drawable/ic_favorite_border"
         app:backgroundTint="@android:color/holo_red_light"
         app:layout_anchor="@+id/app_bar"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchorGravity="bottom|end"/>
 
 </android.support.design.widget.CoordinatorLayout>

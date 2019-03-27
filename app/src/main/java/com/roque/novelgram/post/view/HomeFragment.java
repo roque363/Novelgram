@@ -102,9 +102,11 @@ public class HomeFragment extends Fragment {
                                     String name = document.get("name").toString();
                                     String time = document.get("time").toString();
                                     String like_number = document.get("like_number").toString();
+                                    String description = document.get("description").toString();;
+                                    String extra = document.get("extra").toString();;
 
                                     Log.d(TAG, "Id: " + document.getId() + ", Nombre: " + name);
-                                    pictures.add(new Picture(key, picture, name, time, like_number));
+                                    pictures.add(new Picture(key, picture, name, time, like_number, description, extra));
                                 }
                             }
                             pictureAdapterRecyclerView.notifyDataSetChanged();

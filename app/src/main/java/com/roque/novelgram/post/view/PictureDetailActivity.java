@@ -31,7 +31,7 @@ import java.util.Objects;
 public class PictureDetailActivity extends AppCompatActivity {
 
     private ImageView imageHeader;
-    private TextView titlePictureDetail, likeNumberDetail, secondTitlePictureDetail;
+    private TextView titlePictureDetail, likeNumberDetail, timeCardDetail, contentDescription, contentPresentation;
     private Button btnEliminarPicture;
 
     private NovelgramApplication app;
@@ -41,7 +41,7 @@ public class PictureDetailActivity extends AppCompatActivity {
     private FirebaseStorage firebaseStorage;
     private FirebaseFirestore firebaseFirestore;
 
-    private String key, photo, title, time, like_number;
+    private String key, photo, title, time, like_number, description, extra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +56,11 @@ public class PictureDetailActivity extends AppCompatActivity {
 
         imageHeader = findViewById(R.id.imageHeader);
         titlePictureDetail = findViewById(R.id.titlePictureDetail);
-        secondTitlePictureDetail = findViewById(R.id.secondTitlePictureDetail);
         likeNumberDetail = findViewById(R.id.likeNumberDetail);
+        timeCardDetail = findViewById(R.id.timeCardDetail);
+        contentDescription = findViewById(R.id.contentImageDescription);
+        contentPresentation = findViewById(R.id.contentImagePresentation);
+
         btnEliminarPicture = findViewById(R.id.btnEliminarPicture);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -120,15 +123,19 @@ public class PictureDetailActivity extends AppCompatActivity {
             title = extras.getString("strTitle");
             time = extras.getString("strTime");
             like_number = extras.getString("strLikeNumber");
-            Log.d("PictureDetailActivity", key);
+            description = extras.getString("strDescription");
+            extra = extras.getString("strExtra");
+            Log.d("PictureDetailActivity", "Picture: " + key);
         } else {
             Toast.makeText(PictureDetailActivity.this, "Ocurrió un error al traer la foto", Toast.LENGTH_SHORT).show();
         }
 
         Picasso.get().load(photo).placeholder(R.drawable.image_default).into(imageHeader);
         titlePictureDetail.setText(title);
-        secondTitlePictureDetail.setText(title);
+        timeCardDetail.setText(time);
         likeNumberDetail.setText(like_number);
+        contentDescription.setText(description);
+        contentPresentation.setText(extra);
     }
 
     public void showToolbar(String tittle, boolean upButton){

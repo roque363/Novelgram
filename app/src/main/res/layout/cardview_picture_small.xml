@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/picture_card"
+            android:id="@+id/picture_card_small"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_cardview"
             android:background="@color/grey"
@@ -33,7 +33,7 @@
             android:background="@color/background_card">
 
             <TextView
-                android:id="@+id/name_card"
+                android:id="@+id/name_card_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username_card"
@@ -43,40 +43,6 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:maxLines="1" />
-
-            <TextView
-                android:id="@+id/time_card"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="@string/timecard_card"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/textsize_firstword_card"
-                android:fontFamily="@font/quicksand_medium"
-                android:layout_marginStart="5dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/margintop_like_card">
-
-                <CheckBox
-                    android:id="@+id/like_check_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox_selector"/>
-
-                <TextView
-                    android:id="@+id/like_number_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/likenumber_card"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/textsize_firstword_card"
-                    android:fontFamily="@font/quicksand_medium"
-                    android:layout_marginStart="5dp"/>
-
-            </LinearLayout>
 
         </LinearLayout>
 

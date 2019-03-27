@@ -250,7 +250,6 @@ public class NewPostActivity extends AppCompatActivity {
     private void uploadFile() {
         if (mImageUri != null) {
             final StorageReference fileReference = storageReference.child("postImages/" + System.currentTimeMillis()+"."+getFileExtension(mImageUri));
-            final String timeStamp = new SimpleDateFormat("yyMMdd_HH-mm-ss").format(new Date());
             uploadTask = fileReference.putFile(mImageUri);
 
             uploadTask
@@ -288,7 +287,12 @@ public class NewPostActivity extends AppCompatActivity {
                             },500);
                             Toast.makeText(NewPostActivity.this,"Subida exitosa", Toast.LENGTH_SHORT).show();
 
-                            Picture picture = new Picture(downloadUri.toString(),txtTitle.getText().toString().trim(),timeStamp,"0");
+                            String photoURL = downloadUri.toString();
+                            String timeStamp = new SimpleDateFormat("dd/MM/yy").format(new Date());
+                            String title = txtTitle.getText().toString().trim();
+                            Log.w(TAG, "URL Photo > " + photoURL);
+
+                            Picture picture = new Picture(photoURL, title, timeStamp,"0");
                             firebaseFirestore.collection("pictures").add(picture);
 
                         }
