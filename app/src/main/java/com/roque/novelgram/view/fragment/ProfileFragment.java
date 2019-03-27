@@ -30,7 +30,7 @@ import java.util.Objects;
  */
 public class ProfileFragment extends Fragment {
 
-    RecyclerView picturesRecycle;
+    private RecyclerView picturesRecycle;
     private FirebaseFirestore firebaseFirestore;
     private static final String TAG = "ProfileFragment";
 
@@ -65,6 +65,9 @@ public class ProfileFragment extends Fragment {
 
         final ArrayList<Picture> pictures = new ArrayList<>();
 
+        final PictureAdapterRecyclerView pictureAdapterRecyclerView = new PictureAdapterRecyclerView(pictures, R.layout.cardview_picture, getActivity());
+        picturesRecycle.setAdapter(pictureAdapterRecyclerView);
+
         firebaseFirestore.collection("pictures")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -73,16 +76,16 @@ public class ProfileFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.exists()) {
+                                    String key = document.getId();
                                     String picture = document.get("picture").toString();
                                     String name = document.get("name").toString();
                                     String time = document.get("time").toString();
                                     String like_number = document.get("like_number").toString();
 
-                                    pictures.add(new Picture(picture, name, time, like_number));
+                                    pictures.add(new Picture(key, picture, name, time, like_number));
                                 }
                             }
-                            PictureAdapterRecyclerView pictureAdapterRecyclerView = new PictureAdapterRecyclerView(pictures, R.layout.cardview_picture, getActivity());
-                            picturesRecycle.setAdapter(pictureAdapterRecyclerView);
+                            pictureAdapterRecyclerView.notifyDataSetChanged();
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }

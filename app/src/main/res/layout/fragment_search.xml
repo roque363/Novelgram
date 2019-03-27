@@ -25,10 +25,9 @@
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="10dp"
-                android:useDefaultMargins="true">
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="12dp">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/search_fragment_recycler"

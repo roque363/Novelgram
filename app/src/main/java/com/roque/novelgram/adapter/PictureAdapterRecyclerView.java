@@ -60,7 +60,7 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
 
     @Override
     public void onBindViewHolder(@NonNull PictureViewHolder holder, int position) {
-        Picture picture = pictures.get(position);
+        final Picture picture = pictures.get(position);
         holder.nameCard.setText(picture.getName());
         holder.timeCard.setText(picture.getTime());
         holder.likeNumberCard.setText(picture.getLike_number());
@@ -73,6 +73,12 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
                 String transitionNamePicture = activity.getString(R.string.transitionname_picture);
 
                 Intent intent = new Intent(activity, PictureDetailActivity.class);
+                intent.putExtra("strKey", picture.getKey());
+                intent.putExtra("strPicture", picture.getPicture());
+                intent.putExtra("strTitle", picture.getName());
+                intent.putExtra("strTime", picture.getTime());
+                intent.putExtra("strLikeNumber", picture.getLike_number());
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     Explode explode = new Explode();
                     explode.setDuration(1000);

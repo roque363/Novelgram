@@ -12,7 +12,7 @@
     <dimen name="textsize_username_card">25sp</dimen>
     <dimen name="textsize_firstword_card">15sp</dimen>
     <dimen name="margintop_like_card">10dp</dimen>
-    <dimen name="appbarlayout">256dp</dimen>
+    <dimen name="appbarlayout">316dp</dimen>
     <dimen name="textsize_username_detail">25sp</dimen>
     <dimen name="textsize_likenumber_detail">15sp</dimen>
     <dimen name="height_divider">1dp</dimen>

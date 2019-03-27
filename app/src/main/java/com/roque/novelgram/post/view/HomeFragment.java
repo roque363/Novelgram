@@ -32,6 +32,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 import com.roque.novelgram.R;
 import com.roque.novelgram.adapter.PictureAdapterRecyclerView;
@@ -85,6 +86,9 @@ public class HomeFragment extends Fragment {
 
         final ArrayList<Picture> pictures = new ArrayList<>();
 
+        final PictureAdapterRecyclerView pictureAdapterRecyclerView = new PictureAdapterRecyclerView(pictures, R.layout.cardview_picture, getActivity());
+        picturesRecycle.setAdapter(pictureAdapterRecyclerView);
+
         firebaseFirestore.collection("pictures")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -93,18 +97,18 @@ public class HomeFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.exists()) {
+                                    String key = document.getId();
                                     String picture = document.get("picture").toString();
                                     String name = document.get("name").toString();
                                     String time = document.get("time").toString();
                                     String like_number = document.get("like_number").toString();
 
-                                    Log.d(TAG, "Nombre: "+ name);
-                                    pictures.add(new Picture(picture, name, time, like_number));
+                                    Log.d(TAG, "Id: " + document.getId() + ", Nombre: " + name);
+                                    pictures.add(new Picture(key, picture, name, time, like_number));
                                 }
                             }
+                            pictureAdapterRecyclerView.notifyDataSetChanged();
                             hideProgressBar();
-                            PictureAdapterRecyclerView pictureAdapterRecyclerView = new PictureAdapterRecyclerView(pictures, R.layout.cardview_picture, getActivity());
-                            picturesRecycle.setAdapter(pictureAdapterRecyclerView);
                         } else {
                             hideProgressBar();
                             Log.d(TAG, "Error getting documents: ", task.getException());

@@ -19,14 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="@color/colorPrimary">
+            app:contentScrim="@color/transparent">
 
             <ImageView
                 android:id="@+id/imageHeader"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:background="@drawable/miku"
+                android:background="@color/grey"
                 app:layout_collapseMode="parallax"
                 tools:ignore="ContentDescription"
                 android:transitionName="@string/transitionname_picture"/>
@@ -54,7 +54,7 @@
             android:paddingTop="@dimen/activity_vertical_margin">
 
             <TextView
-                android:id="@+id/username_detail"
+                android:id="@+id/titlePictureDetail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/textsize_username_detail"
@@ -71,14 +71,14 @@
                 android:paddingRight="@dimen/activity_horizontal_margin">
 
                 <TextView
-                    android:id="@+id/like_number_detail"
+                    android:id="@+id/likeNumberDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/textsize_likenumber_detail"
                     android:text="@string/likenumber_detail" />
 
                 <TextView
-                    android:id="@+id/second_word_like_detail"
+                    android:id="@+id/secondWordLikeDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/textsize_likenumber_detail"
@@ -93,7 +93,7 @@
                 android:background="@android:color/darker_gray"/>
 
             <TextView
-                android:id="@+id/title_image_detail"
+                android:id="@+id/secondTitlePictureDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
@@ -114,6 +114,20 @@
                 android:paddingRight="35dp"
                 android:text="@string/contentimage_detail"
                 android:textSize="@dimen/textsize_contentimage_detail" />
+
+            <Button
+                android:id="@+id/btnEliminarPicture"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:fontFamily="@font/quicksand_bold"
+                android:text="Eliminar"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:theme="@style/RaiseButtonRed"/>
 
         </LinearLayout>
 

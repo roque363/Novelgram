@@ -1,7 +1,10 @@
 package com.roque.novelgram.model;
 
+import com.google.firebase.firestore.Exclude;
+
 public class Picture {
 
+    private String key;
     private String picture;
     private String name;
     private String time;
@@ -10,6 +13,14 @@ public class Picture {
     public Picture () {}
 
     public Picture(String picture, String name, String time, String like_number) {
+        this.picture = picture;
+        this.name = name;
+        this.time = time;
+        this.like_number = like_number;
+    }
+
+    public Picture(String key, String picture, String name, String time, String like_number) {
+        this.key = key;
         this.picture = picture;
         this.name = name;
         this.time = time;
@@ -46,5 +57,15 @@ public class Picture {
 
     public void setLike_number(String like_number) {
         this.like_number = like_number;
+    }
+
+    @Exclude
+    public String getKey() {
+        return key;
+    }
+
+    @Exclude
+    public void setKey(String key) {
+        this.key = key;
     }
 }

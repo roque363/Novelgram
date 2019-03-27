@@ -20,6 +20,12 @@
         <item name="colorControlHighlight">@color/colorPrimaryLight</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    <style name="RaiseButtonRed" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/dark_red</item>
+        <item name="colorControlHighlight">@color/light_red</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
     
     <style name="EditTextWhite" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/quicksand_medium</item>
