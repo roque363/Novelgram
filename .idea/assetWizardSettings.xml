@@ -105,7 +105,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="paddingPercent" value="10" />
+                                                <entry key="paddingPercent" value="15" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -116,8 +117,11 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\ROQUE\Desktop\logo.png" />
-                                      <entry key="outputName" value="ic_logo" />
+                                      <entry key="backgroundColor" value="95c3ff" />
+                                      <entry key="cropped" value="true" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="F:\Imágenes - Local\Imagenes-Proyectos\Novelgram\logo_blank.png" />
+                                      <entry key="outputName" value="icono_logo_white" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -155,7 +159,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="NOTIFICATION" />
+                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>
