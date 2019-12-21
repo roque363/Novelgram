@@ -1,21 +1,14 @@
 package com.roque.novelgram.post.view;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -51,13 +44,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 public class NewPostActivity extends AppCompatActivity {
 
     private ImageView imgPhoto;
     private LinearLayout btnImgContent;
     private RelativeLayout imgBackground;
     private Button btnCreatePost;
-    private EditText txtTitle;
+    private EditText txtTitle, txtDescription, txtExtra;
     private ProgressBar progressBar;
 
     private Uri mImageUri;
@@ -92,6 +89,8 @@ public class NewPostActivity extends AppCompatActivity {
         imgBackground = (RelativeLayout)findViewById(R.id.imgBackground);
         btnCreatePost = (Button)findViewById(R.id.btnCreatePost);
         txtTitle = (EditText)findViewById(R.id.txtTitle);
+        txtDescription = findViewById(R.id.txtDescription);
+        txtExtra = findViewById(R.id.txtExtra);
         progressBar = findViewById(R.id.progressBar);
 
         btnImgContent.setOnClickListener(new View.OnClickListener() {
@@ -134,33 +133,6 @@ public class NewPostActivity extends AppCompatActivity {
         });
     }
 
-    private void selectOption() {
-        final CharSequence[] options = {"Camara","Galeria","Cancelar"};
-        android.support.v7.app.AlertDialog.Builder builder =
-                new android.support.v7.app.AlertDialog.Builder(NewPostActivity.this);
-        builder.setTitle("");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (options[i].equals("Camara")) {
-                    dialogInterface.dismiss();
-                    String message = getString(R.string.opening_camera);
-                    Toast.makeText(NewPostActivity.this, message, Toast.LENGTH_SHORT).show();
-                    takePicture();
-
-                } else if (options[i].equals("Galeria")) {
-                    dialogInterface.dismiss();
-                    openFileChooser();
-
-                } else if (options[i].equals("Cancelar")) {
-                    dialogInterface.dismiss();
-
-                }
-            }
-        });
-        builder.show();
-    }
-
     private void uploadPhoto() {
         imgPhoto.setDrawingCacheEnabled(true);
         imgPhoto.buildDrawingCache();
@@ -198,6 +170,8 @@ public class NewPostActivity extends AppCompatActivity {
                                 String photoURL = uriPhoto.toString();
                                 String timeStamp = new SimpleDateFormat("yyMMdd_HH-mm-ss").format(new Date());
                                 String title = txtTitle.getText().toString().trim();
+                                String description = "";
+                                String extra = "";
                                 Log.w(TAG, "URL Photo > " + photoURL);
 
                                 Handler handler = new Handler();
@@ -207,7 +181,7 @@ public class NewPostActivity extends AppCompatActivity {
                                         progressBar.setProgress(0);
                                     }
                                 },500);
-                                Picture picture = new Picture(photoURL, title, timeStamp,"0");
+                                Picture picture = new Picture(photoURL, title, timeStamp,"0", description, extra);
                                 firebaseFirestore.collection("pictures").add(picture);
 
                                 Toast.makeText(NewPostActivity.this,"Subida exitosa", Toast.LENGTH_SHORT).show();
@@ -221,6 +195,7 @@ public class NewPostActivity extends AppCompatActivity {
     private boolean validatePost() {
         boolean valid = true;
         String title = txtTitle.getText().toString();
+        String description = txtDescription.getText().toString();
         imgPhoto.setDrawingCacheEnabled(true);
         imgPhoto.buildDrawingCache();
         Bitmap bitmap = imgPhoto.getDrawingCache();
@@ -235,6 +210,12 @@ public class NewPostActivity extends AppCompatActivity {
         if (bitmap == null) {
             valid = false;
             Toast.makeText(this,"Ningún archivo seleccionado",Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(description)) {
+            txtDescription.setError("Campo requerido");
+            valid = false;
+        } else {
+            txtDescription.setError(null);
         }
 
         return valid;
@@ -290,9 +271,13 @@ public class NewPostActivity extends AppCompatActivity {
                             String photoURL = downloadUri.toString();
                             String timeStamp = new SimpleDateFormat("dd/MM/yy").format(new Date());
                             String title = txtTitle.getText().toString().trim();
+                            String description = txtDescription.getText().toString().trim();
+                            String extra = txtExtra.getText().toString().trim();
                             Log.w(TAG, "URL Photo > " + photoURL);
+                            Log.w(TAG, "URL Photo > " + description);
+                            Log.w(TAG, "URL Photo > " + extra);
 
-                            Picture picture = new Picture(photoURL, title, timeStamp,"0");
+                            Picture picture = new Picture(photoURL, title, timeStamp,"0", description, extra);
                             firebaseFirestore.collection("pictures").add(picture);
 
                         }

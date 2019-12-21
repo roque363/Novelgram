@@ -4,10 +4,8 @@ import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,18 +16,22 @@ import com.roque.novelgram.login.view.LoginActivity;
 
 import java.security.MessageDigest;
 
+import androidx.annotation.NonNull;
+
 public class NovelgramApplication extends Application {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseStorage firebaseStorage;
+    private static final String TAG = "NovelgramApplication";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        System.out.print("KeyHashe: " + KeyHashes());
+        // System.out.print("KeyHashe: " + KeyHashes());
 
         FacebookSdk.sdkInitialize(getApplicationContext());
+        Log.w(TAG, "Usuario No logeado");
 
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -37,9 +39,9 @@ public class NovelgramApplication extends Application {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                 if (firebaseUser != null) {
-                    Log.w("NovelgramApplication", "Usuario logeado" + firebaseUser);
+                    Log.w(TAG, "Usuario logeado" + firebaseUser);
                 } else {
-                    Log.w("NovelgramApplication", "Usuario No logeado");
+                    Log.w(TAG, "Usuario No logeado");
                 }
             }
         };

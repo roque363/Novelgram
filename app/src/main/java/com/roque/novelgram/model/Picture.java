@@ -14,11 +14,13 @@ public class Picture {
 
     public Picture () {}
 
-    public Picture(String picture, String name, String time, String like_number) {
+    public Picture(String picture, String name, String time, String like_number, String description, String extra) {
         this.picture = picture;
         this.name = name;
         this.time = time;
         this.like_number = like_number;
+        this.description = description;
+        this.extra = extra;
     }
 
     public Picture(String key, String picture, String name, String time, String like_number, String description, String extra) {
@@ -73,22 +75,18 @@ public class Picture {
         this.key = key;
     }
 
-    @Exclude
     public String getDescription() {
         return description;
     }
 
-    @Exclude
     public void setDescription(String description) {
         this.description = description;
     }
 
-    @Exclude
     public String getExtra() {
         return extra;
     }
 
-    @Exclude
     public void setExtra(String extra) {
         this.extra = extra;
     }

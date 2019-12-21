@@ -3,10 +3,7 @@ package com.roque.novelgram.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.RecyclerView;
-import android.transition.Explode;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +16,10 @@ import com.roque.novelgram.post.view.PictureDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdapterRecyclerView.PictureViewHolder> {
 
@@ -82,9 +83,9 @@ public class PictureAdapterRecyclerView extends RecyclerView.Adapter<PictureAdap
                 intent.putExtra("strExtra", picture.getExtra());
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                    Explode explode = new Explode();
-                    explode.setDuration(1000);
-                    activity.getWindow().setExitTransition(explode);
+                    //Explode explode = new Explode();
+                    //explode.setDuration(1000);
+                    activity.getWindow().setExitTransition(new Fade());
                     activity.startActivity(intent, ActivityOptionsCompat
                             .makeSceneTransitionAnimation(activity, view, transitionNamePicture)
                             .toBundle());

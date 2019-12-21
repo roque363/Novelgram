@@ -2,19 +2,16 @@ package com.roque.novelgram.view.fragment;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -25,6 +22,13 @@ import com.roque.novelgram.model.Picture;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -33,6 +37,10 @@ public class ProfileFragment extends Fragment {
     private RecyclerView picturesRecycle;
     private FirebaseFirestore firebaseFirestore;
     private static final String TAG = "ProfileFragment";
+    private TextView userName;
+
+    // vars
+    String uid, name, email;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -48,7 +56,8 @@ public class ProfileFragment extends Fragment {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        picturesRecycle = (RecyclerView) view.findViewById(R.id.picture_profile_recycler);
+        picturesRecycle = view.findViewById(R.id.picture_profile_recycler);
+        userName = view.findViewById(R.id.userName);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -57,6 +66,17 @@ public class ProfileFragment extends Fragment {
 
         buildPicture();
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            uid = user.getUid();
+            name = user.getDisplayName();
+            email = user.getEmail();
+
+            userName.setText(name);
+        } else {
+            // No user is signed in
+        }
         return view;
 
     }
@@ -96,8 +116,8 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    public void showToolbar(String tittle, boolean upButton, View view){
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+    private void showToolbar(String tittle, boolean upButton, View view){
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(tittle);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(upButton);

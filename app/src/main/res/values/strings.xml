@@ -3,11 +3,13 @@
     <string name="title_activity_reference">ReferenceActivity</string>
     <string name="fb_login_protocol_scheme">fb497995777390881</string>
 
+    <!-- Login and Register Text -->
     <string name="hint_username">Nombre de usuario</string>
     <string name="hint_password">Contraseña</string>
     <string name="text_btn_login">Login</string>
-    <string name="dont_have_account">¿No tienes una cuenta?</string>
-    <string name="create_here">, Regístrate</string>
+    <string name="continuar_con_facebook">Continuar con Facebook</string>
+    <string name="dont_have_account">¿No tienes una cuenta?, </string>
+    <string name="create_here">Regístrate</string>
 
     <string name="hint_email">Correo electrónico</string>
     <string name="hint_name">Nombre Completo</string>
@@ -35,6 +37,7 @@
     <string name="login_blank">Completar Campos</string>
     <string name="hint_title">Titulo</string>
     <string name="hint_description">Descripcion</string>
+    <string name="hint_extra">Extra Info</string>
     <string name="text_btn_create_post">Crear Post</string>
     <string name="message_cameraNotAvailable">La camara no esta disponible</string>
     <string name="message_cameraNotAvailablePermission">La aplicación no cuenta con los permisos necesarios</string>
@@ -43,6 +46,14 @@
     <string name="loading_photo">Cargando Foto..</string>
     <string name="menu_signout">Cerrar Sesión</string>
     <string name="menu_about">Acerca de</string>
+
+    <!-- Notification Text -->
+    <string name="login_success">Login Exitoso</string>
+    <string name="login_error_face">Error en login</string>
+    <string name="login_fallo">La autenticación falló</string>
+    <string name="cuenta_creada">Cuenta Creada</string>
+    <string name="error_crear_cuenta">Ocurrió un Error al crear la cuenta</string>
+    <string name="estableciendo_conexion">Estableciendo conexión....</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 </resources>
