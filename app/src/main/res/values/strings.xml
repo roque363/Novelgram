@@ -9,7 +9,7 @@
     <string name="text_btn_login">Login</string>
     <string name="continuar_con_facebook">Continuar con Facebook</string>
     <string name="dont_have_account">¿No tienes una cuenta?, </string>
-    <string name="create_here">Regístrate</string>
+    <string name="create_here"> Regístrate</string>
 
     <string name="hint_email">Correo electrónico</string>
     <string name="hint_name">Nombre Completo</string>

@@ -39,12 +39,12 @@
             android:id="@+id/usernameLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/hint_username"
             android:theme="@style/EditTextWhite">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_username"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -54,13 +54,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/EditTextWhite"
+            android:hint="@string/hint_password"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_password"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
